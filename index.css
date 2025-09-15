@@ -5,6 +5,7 @@
             --card-bg: #fff;
             --accent: #3a6cf4;
             --muted: #6b7280;
+      
         }
 
         * {
@@ -13,6 +14,7 @@
             text-transform: capitalize;
             font-family: "Poppins", sans-serif;
             box-sizing: border-box;
+           user-select: none;
         }
 
         html {
@@ -536,9 +538,10 @@ footer{
            .sub{
             background-color: ;
             padding: 8px;
-            color:#3e3a3e;
+            color: #292829;
             border-radius: 5px;
            }
+
 
 
 
