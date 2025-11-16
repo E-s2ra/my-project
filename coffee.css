@@ -1,0 +1,223 @@
+/* Reset & box-sizing */
+*::after, *::before, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    margin: 0 5%; /* flexible margin */
+    background-color: #fdded0;
+    font-family: sans-serif;
+}
+
+/* Navigation */
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+.nav .log h1 {
+    font-weight: 700;
+    font-family: sans-serif;
+    color: black;
+    font-size: 46px;
+}
+.nav .log b {
+    color: #ff511c;
+}
+.nav ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap; /* allow wrapping on small screens */
+}
+.nav ul li {
+    margin-right: 30px;
+}
+.nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+.nav ul .active::after {
+    content: '';
+    width: 50%;
+    height: 3px;
+    background-color: #ff511c;
+    position: relative;
+    margin-left: 10px;
+}
+
+/* Inputs and buttons */
+input {
+    padding: 10px 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.singin {
+    background-color: transparent;
+    border: none;
+    margin-right: 0.5em;
+    font-size: 20px;
+    color: black;
+}
+.singup {
+    background-color: #ff511c;
+    color: white;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-right: 2em;
+}
+
+/* Content Section */
+.content {
+    display: grid;
+    grid-template-columns: 50% auto;
+    align-items: center;
+    margin-top: 120px;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+.content .content-left {
+    width: 100%;
+}
+.info {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+h2 {
+    font-size: 40px;
+    font-family: sans-serif;
+    margin-bottom: 40px;
+    margin-left: 1em;
+}
+.p {
+    font-size: 23px;
+    line-height: 2pc;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: left;
+}
+button {
+    padding: 10px 23px;
+    background-color: #ff511c;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    width: 10em;
+    cursor: pointer;
+    margin-left: 5em;
+    margin-top: 2em;
+}
+
+/* Right content image */
+.content-rigth {
+    width: 100%;
+}
+.img {
+    width: 100%;
+    max-width: 300px; /* scales down on small screens */
+    height: auto;
+    user-select: none;
+    position: relative;
+    animation: rotate 10s linear infinite;
+    border-radius: 50%;
+    
+    
+}
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Category */
+.category {
+    width: 100%;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+.category .list-item {
+    width: 90%;
+    position: relative;
+    margin-top: 100px;
+}
+
+/* Card list */
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.card {
+    width: 200px;
+    height: auto;
+    display: block;
+    padding: 10px;
+    margin-top: 10em;
+    border-radius: 10px;
+    position: relative;
+    background-color: white;
+    outline: 2px solid #ff511c;
+}
+.card img {
+    width: 100px;
+    height: auto;
+    bottom: 15em;
+    left: 50px;
+    object-fit: cover;
+    object-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    box-shadow: 0 20px 20px #ff511c;
+    border-radius: 50%;
+    
+}
+
+
+
+
+
+/* Food titles */
+.food-titel {
+    padding: 40px 0 15px;
+}
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Times New Roman', Times, serif;
+}
+p {
+    font-size: 15px;
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.price {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+/* ===== Responsive ===== */
+
+/* Phones */
+@media (max-width: 600px) {
+    body { margin: 0 2%; font-size: 14px; }
+    .content { grid-template-columns: 1fr; gap: 20px; }
+    button { margin-left: 0; align-self: center; }
+    .card-list { grid-template-columns: 1fr; gap: 15px; }
+    .nav ul { justify-content: center; }
+    h2 { font-size: 28px; margin-left: 0; text-align: center; }
+    .p { font-size: 16px; text-align: center; }
+}
