@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* the css  part  style for */
+        * {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5;
+            margin: 0;
+        }
+
+        .slider-wrapper {
+            width: 90%;
+            max-width: 800px;
+
+        }
+
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: #000;
+        }
+
+        #sliderimg {
+            width: 100%;
+            display: block;
+            transition: opacity 0.5s ease;
+        }
+
+        .slider-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 20px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .nav-btn-prev:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .dots-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background-color: #333;
+            width: 25px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--html part style for slides-->
+    <div class="slider-wrapper">
+        <div class="slider-container">
+            <img id="sliderimg" src="https://picsum.photos/id/10/800/450" alt="Slider" alt="">
+            <div class="slider-info">
+                <h2 id="imgtitel">pretty nature</h2>
+                <p id="imgenumber">1 / 4</p>
+            </div>
+            <button class="nav-btn prev" id="prevbtn">&#10094;</button>
+            <button class="nav-btn next" id="nextbtn">&#10095;</button>
+        </div>
+        <div class="dots-container" id="dotscongtaner"></div>
+    </div>
+
+
+    <script>
+
+        //the img Array
+        const slides = [
+            { url: "https://picsum.photos/id/10/800/450", title: "prety nature" },
+            { url: "https://picsum.photos/id/20/800/450", title: "city life" },
+            { url: "https://picsum.photos/id/30/800/450", title: "travel skay" },
+            { url: "https://picsum.photos/id/40/800/450", title: "the sea" }
+        ];
+
+        let curentindex = 0;
+        //calling the ides of html 
+        const img = document.getElementById("sliderimg");
+        const titel = document.getElementById("imgenumber");
+        const numBer = document.getElementById("imgtitel");
+        const dotscongtaner = document.getElementById("dotscongtaner");
+
+        //creating the tods
+        slides.forEach((_, index) => {
+            const dot = document.createElement("span");
+            dot.classList.add("dot");
+            if (index === 0)
+                dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                goToSlide(index);
+            });
+            dotscongtaner.appendChild(dot);
+        });
+
+
+        //update imgis and change number wiht imgs
+        function updateslide() {
+            img.style.opacity = "0.5";
+
+            setTimeout(() => {
+                img.src = slides[curentindex].url;
+                titel.textContent = slides[curentindex].title;
+                numBer.textContent = `${curentindex + 1}/${slides.length}`;
+                document.querySelectorAll(".dot").forEach((dot, i) => {
+                    dot.classList.toggle("active", i === curentindex)
+
+                });
+                img.style.opacity = "1";
+            }, 200);
+        }
+
+        //for changing the imgs and go back 
+        function nextslide() {
+            curentindex = (curentindex + 1) % slides.length;
+            updateslide();
+        }
+
+        function prevslide() {
+            curentindex = (curentindex - 1 + slides.length) % slides.length;
+            updateslide();
+        }
+        //going fot the img you want
+        function goToSlide(index) {
+            curentindex = index;
+            updateslide();
+            resetTimer();
+        }
+
+        document.getElementById("nextbtn").addEventListener("click", () => {
+            nextslide();
+            resetTimer();
+        });
+        document.getElementById("prevbtn").addEventListener("click", () => {
+            prevslide();
+            resetTimer();
+        });
+        //change img after 5 sec
+        let timer = setInterval(nextslide, 5000);
+
+        // Prevents slides from being damaged when the user edits them
+        function resetTimer() {
+            clearInterval(timer);
+            timer = setInterval(nextslide, 5000);
+        }
+
+
+
+    </script>
+</body>
+
+</html>
